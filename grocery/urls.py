@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from grocery.core import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('level1/', views.level1),
+    path('level2/', views.level2),
 ]

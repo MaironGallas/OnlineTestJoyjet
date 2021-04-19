@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 python-decouple = "*"
 dj-database-url = "*"
+install = "*"
+djangorestframework = "*"
 
 [dev-packages]
 flake8 = "*"
