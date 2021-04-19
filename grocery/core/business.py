@@ -1,4 +1,4 @@
-def get_price(id, articles):
+def get_price(id: int, articles: list, discounts: list = None) -> list:
     """
         Returns the price of a specific article from a given list.
         Parameters:
@@ -10,16 +10,27 @@ def get_price(id, articles):
         """
     for article in articles:
         if article['id'] == id:
-            return article['price']
+            price = article['price']
+
+    type = ''
+    value = 0
+    if discounts:
+        for discount in discounts:
+            if discount['article_id'] == id:
+                value = discount['value']
+                type = discount['type']
+        price = price - value if type == 'amount' else int(price - (price * value / 100))
+    return price
 
 
-def get_total_price(cart: dict, articles: list, delivery_fees: list = None) -> list:
+
+def get_total_price(cart: dict, articles: list, delivery_fees: list = None, discounts: list = None) -> list:
     """
     CORRIGIR
     Returns a list of carts with the prices of all its articles totalized.
     Parameters:
-        articles: A list with all articles. This parameter is mandatory.
         cart: A list of carts with their articles and their quantities. This parameter is mandatory.
+        articles: A list with all articles. This parameter is mandatory.
         delivery_fees: A list of delivery fees if applicable. This parameter is optional.
         discounts: A list of discounts if applicable. This parameter is optional.
     Returns:
@@ -29,7 +40,7 @@ def get_total_price(cart: dict, articles: list, delivery_fees: list = None) -> l
     delivery_value = 0
 
     for item in cart['items']:
-        total_item_price += get_price(item['article_id'], articles) * item['quantity']
+        total_item_price += get_price(item['article_id'], articles, discounts) * item['quantity']
 
     if delivery_fees:
         for delivery_fee in delivery_fees:

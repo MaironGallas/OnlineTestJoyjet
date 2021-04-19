@@ -7,3 +7,4 @@ class Payload(models.Model):
     articles = models.JSONField()
     carts = models.JSONField()
     delivery_fees = models.JSONField(default=list)
+    discounts = models.JSONField(default=list)

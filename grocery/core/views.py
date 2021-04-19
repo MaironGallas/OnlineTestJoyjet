@@ -42,3 +42,22 @@ def level2(request):
             carts = {'carts': carts_result}
             return Response(carts, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+def level3(request):
+    """
+    This view receives request with a payload with articles and carts and responds with a JSON with carts with total
+    price.
+    """
+    if request.method == 'POST':
+        serializer = PayloadSerializer(data=request.data)
+        if serializer.is_valid():
+            carts_result = []
+            for cart in serializer.data['carts']:
+                total_cart = get_total_price(cart, serializer.data['articles'], serializer.data['delivery_fees'],
+                                             serializer.data['discounts'])
+                carts_result.append({'id': cart['id'], 'total': total_cart})
+            carts = {'carts': carts_result}
+            return Response(carts, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
