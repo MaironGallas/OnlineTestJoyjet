@@ -24,8 +24,7 @@ def level1(request):
                 carts_result.append({'id': cart['id'], 'total': total_cart})
             carts = {'carts': carts_result}
             return Response(carts, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def level2(request):
@@ -42,5 +41,4 @@ def level2(request):
                 carts_result.append({'id': cart['id'], 'total': total_cart})
             carts = {'carts': carts_result}
             return Response(carts, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -40,9 +40,9 @@ def get_total_price(cart: dict, articles: list, delivery_fees: list = None) -> l
                 min = delivery_fee['eligible_transaction_volume']['min_price']
                 max = delivery_fee['eligible_transaction_volume']['max_price']
 
-            if min <= total_item_price <= max:
+            if min <= total_item_price < max:
                 delivery_value = delivery_fee['price']
 
-    total_price = total_item_price - delivery_value
+    total_price = total_item_price + delivery_value
 
     return total_price
