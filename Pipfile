@@ -9,10 +9,11 @@ python-decouple = "*"
 dj-database-url = "*"
 install = "*"
 djangorestframework = "*"
+pytest-django = "*"
+pytest = "*"
 
 [dev-packages]
 flake8 = "*"
-pytest-django = "*"
 
 [requires]
 python_version = "3.9"
