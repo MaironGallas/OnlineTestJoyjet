@@ -24,17 +24,16 @@ def get_price(id: int, articles: list, discounts: list = None) -> list:
 
 
 
-def get_total_price(cart: dict, articles: list, delivery_fees: list = None, discounts: list = None) -> list:
+def get_total_price(cart: dict, articles: list, delivery_fees: list = None, discounts: list = None) -> int:
     """
-    CORRIGIR
-    Returns a list of carts with the prices of all its articles totalized.
+    Returns the sum of the prices of all items in the cart
     Parameters:
-        cart: A list of carts with their articles and their quantities. This parameter is mandatory.
+        cart: A dict of cart with their articles and their quantities. This parameter is mandatory.
         articles: A list with all articles. This parameter is mandatory.
         delivery_fees: A list of delivery fees if applicable. This parameter is optional.
         discounts: A list of discounts if applicable. This parameter is optional.
     Returns:
-        carts: A list of carts with their id and total price.
+        total_price: A sum of price for all items in the cart.
     """
     total_item_price = 0
     delivery_value = 0

@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from grocery.core.business import get_total_price
-from grocery.core.serializers import PayloadSerializer
+from grocery.core.serializers import PayloadSerializerLevel1, PayloadSerializerLevel3, PayloadSerializerLevel2
 
 
 @api_view(['POST'])
@@ -14,9 +14,9 @@ def level1(request):
     """
     This view receives request with a payload with articles and carts and responds with a JSON with carts with total
     price.
-    """
+        """
     if request.method == 'POST':
-        serializer = PayloadSerializer(data=request.data)
+        serializer = PayloadSerializerLevel1(data=request.data)
         if serializer.is_valid():
             carts_result = []
             for cart in serializer.data['carts']:
@@ -29,11 +29,11 @@ def level1(request):
 @api_view(['POST'])
 def level2(request):
     """
-    This view receives request with a payload with articles and carts and responds with a JSON with carts with total
-    price.
+    This view receives request with a payload with articles, carts, and delivery fees and responds with a JSON with
+    carts with total price using the policy of delivery fees.
     """
     if request.method == 'POST':
-        serializer = PayloadSerializer(data=request.data)
+        serializer = PayloadSerializerLevel2(data=request.data)
         if serializer.is_valid():
             carts_result = []
             for cart in serializer.data['carts']:
@@ -47,11 +47,11 @@ def level2(request):
 @api_view(['POST'])
 def level3(request):
     """
-    This view receives request with a payload with articles and carts and responds with a JSON with carts with total
-    price.
+    This view receives request with a payload with articles, carts, delivery fees, and discounts and responds with a
+    JSON with carts with total price using the policy of delivery fees and the discounts if applicable.
     """
     if request.method == 'POST':
-        serializer = PayloadSerializer(data=request.data)
+        serializer = PayloadSerializerLevel3(data=request.data)
         if serializer.is_valid():
             carts_result = []
             for cart in serializer.data['carts']:
